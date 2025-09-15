@@ -23,21 +23,22 @@ namespace server_saas.Service
                 throw new InvalidOperationException("Gemini API key is not configured");
             }
 
+            var apiUrl = $"";
             var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Authorization = new("Bearer", apiKey);
+
+            var promptText = $"You are a professional blog author. Write a {articleLength} article about: '{topic}'.";
 
             var requestBody = new
             {
                 model = "gemini-2.5-flash",
-                messages = new[]
+                contents = new[]
                 {
-                    new { role = "system", content = "You are a professional blog author who writes clear, engaging, and well-structured articles." },
-                    new { role = "user", content = $"Write a '{articleLength}'-word article about: '{topic}'." }
+                    new { parts = new[] { new { text = promptText } } }
                 },
                 temperature = 0.7
             };
 
-            var response = await client.PostAsJsonAsync(GeminiAIApiUrl, requestBody);
+            var response = await client.PostAsJsonAsync(apiUrl, requestBody);
 
             if (!response.IsSuccessStatusCode)
             {
