@@ -1,6 +1,7 @@
 ﻿using server_saas.Dto.Articles;
 using server_saas.Interfaces;
 using server_saas.Models;
+using server_saas.Repository;
 
 namespace server_saas.Service
 {
@@ -36,6 +37,16 @@ namespace server_saas.Service
             await _articleRepo.CreateAsync( newArticle );
 
             return newArticle;
+        }
+
+        public async Task<List<Article>> GetAllArticlesAsync()
+        {
+            return await _articleRepo.GetAllAsync();
+        }
+
+        public async Task<Article?> GetArticleByIdAsync(int id)
+        {
+            return await _articleRepo.GetByIdAsync(id);
         }
     }
 }

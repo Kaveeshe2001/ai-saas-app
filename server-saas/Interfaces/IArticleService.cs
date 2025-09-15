@@ -6,5 +6,7 @@ namespace server_saas.Interfaces
     public interface IArticleService
     {
         Task<Article> CreateArticleAsync(GenerateArticleRequestDto requestDto);
+        Task<List<Article>> GetAllArticlesAsync();
+        Task<Article?> GetArticleByIdAsync(int id);
     }
 }
