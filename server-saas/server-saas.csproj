@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>server_saas</RootNamespace>
+    <UserSecretsId>7eb2479a-8417-4136-b045-0867e6812f8b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

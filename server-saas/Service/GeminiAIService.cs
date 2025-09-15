@@ -23,19 +23,21 @@ namespace server_saas.Service
                 throw new InvalidOperationException("Gemini API key is not configured");
             }
 
-            var apiUrl = $"";
+            var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}";
             var client = _httpClientFactory.CreateClient();
 
             var promptText = $"You are a professional blog author. Write a {articleLength} article about: '{topic}'.";
 
             var requestBody = new
             {
-                model = "gemini-2.5-flash",
                 contents = new[]
                 {
                     new { parts = new[] { new { text = promptText } } }
                 },
-                temperature = 0.7
+                generationConfig = new // All settings go inside this object
+                {
+                    temperature = 0.7
+                }
             };
 
             var response = await client.PostAsJsonAsync(apiUrl, requestBody);
