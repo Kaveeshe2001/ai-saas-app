@@ -1,0 +1,118 @@
+.primary-btn {
+ padding: 17px 32px;
+ color: var(--primary-color);
+ font-family: var(--font-dmsans);
+ font-size: 14px;
+ font-weight: 600;
+ text-transform: uppercase;
+ background-color: transparent;
+ border-radius: 5px;
+ border-bottom: 1px solid var(--primary-color);
+ border: solid var(--primary-color);
+ border-width: 1px 1px 4px;
+ border-right: 4px solid var(--primary-color);
+ padding: 10px 25px;
+ white-space: nowrap;
+ overflow: hidden;
+ position: relative;
+ z-index: 1;
+ transition: all .6s;
+ display: inline-flex;
+ align-items: center;
+ line-height: 1;
+ gap: 10px;
+
+ span {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-radius: 36px;
+  transition: all .6s;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  top: 40.5px;
+  left: 84.2344px;
+ }
+}
+
+.primary-btn.default {
+ span {
+  background-color: var(--primary-color);
+ }
+}
+
+.primary-btn.color-white {
+ color: var(--white-color);
+ background-color: var(--primary-color2);
+ -bs-link-color-rgb: var(--bs-link-hover-color-rgb);
+
+ svg {
+  fill: var(--white-color);
+ }
+
+ span {
+  background-color: var(--primary-color)
+ }
+}
+
+.primary-btn.color-white:hover {
+ color: var(--white-color);
+
+ svg {
+  fill: var(--white-color)
+ }
+}
+
+
+@media (max-width: 576px) {
+ .primary-btn {
+  padding: 13px 20px;
+ }
+}
+
+.primary-btn svg {
+ fill: var(--primary-color);
+ transition: all .6s
+}
+
+.primary-btn:hover {
+ color: var(--white-color);
+
+ span {
+  width: 225%;
+  height: 1000.5px;
+ }
+}
+
+.outline-btn {
+ background-color: transparent;
+ border: 1px solid rgba(34, 34, 34, .5);
+ border-radius: 5px;
+ font-size: 12px !important;
+ color: rgba(34, 34, 34, .5);
+ padding: 8px 16px;
+}
+
+.full-white {
+ border-color: var(--white-color);
+ color: var(--white-color);
+ background: transparent !important;
+
+ svg {
+  fill: var(--white-color);
+ }
+}
+
+.full-white:hover {
+ color: rgba(34, 34, 34, .5);
+ background-color: var(--white-color) !important;
+
+ span {
+  background-color: var(--white-color) !important;
+ }
+
+ svg {
+  fill: rgba(34, 34, 34, .5);
+ }
+}
