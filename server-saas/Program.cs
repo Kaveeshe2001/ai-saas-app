@@ -6,6 +6,7 @@ using server_saas.Data;
 using server_saas.Interfaces;
 using server_saas.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace server_saas
 {
@@ -16,6 +17,14 @@ namespace server_saas
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigins",
+                    builder => builder.WithOrigins("http://localhost:5173", "http://localhost:5173")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod()
+                                      .AllowCredentials());
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -102,10 +111,11 @@ namespace server_saas
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowSpecificOrigins");
+
             app.UseAuthentication();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

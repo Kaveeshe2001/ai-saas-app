@@ -30,5 +30,7 @@ namespace server_saas.Data
             };
             builder.Entity<IdentityRole>().HasData(roles);
         }
+
+        public DbSet<Article> Articles { get; set; }
     }
 }
