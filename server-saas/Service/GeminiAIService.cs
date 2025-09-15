@@ -49,12 +49,14 @@ namespace server_saas.Service
 
             // Using System.Text.Json.JsonElement to parse the response without a strong type
             using var jsonDoc = await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());
-            var choices = jsonDoc.RootElement.GetProperty("choices");
-            var firstChoice = choices[0];
-            var message = firstChoice.GetProperty("message");
-            var content = message.GetProperty("content").GetString();
+            var candidates = jsonDoc.RootElement.GetProperty("candidates");
+            var firstCandidate = candidates[0];
+            var content = firstCandidate.GetProperty("content");
+            var parts = content.GetProperty("parts");
+            var firstPart = parts[0];
+            var generatedText = firstPart.GetProperty("text").GetString();
 
-            return content ?? string.Empty;
+            return generatedText ?? string.Empty;
         }
     }
 }

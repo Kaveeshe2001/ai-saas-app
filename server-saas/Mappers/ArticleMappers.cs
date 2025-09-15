@@ -5,7 +5,7 @@ namespace server_saas.Mappers
 {
     public static class ArticleMappers
     {
-        public static ArticleResponseDto ToArticleResponseDto(Article article)
+        public static ArticleResponseDto ToArticleResponseDto(this Article article)
         {
             return new ArticleResponseDto
             {
@@ -13,8 +13,10 @@ namespace server_saas.Mappers
                 Topic = article.Topic,
                 ArticleLength = article.ArticleLength,
                 Content = article.Content,
-                CreatedAt = article.CreatedAt
+                CreatedAt = article.CreatedAt,
             };
         }
+
+        
     }
 }

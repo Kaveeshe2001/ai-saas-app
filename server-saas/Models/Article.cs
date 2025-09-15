@@ -2,7 +2,7 @@
 
 namespace server_saas.Models
 {
-    public class Articles
+    public class Article
     {
         public int Id { get; set; }
         [Required]

@@ -7,6 +7,8 @@ using server_saas.Interfaces;
 using server_saas.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using server_saas.Repository;
+using server_saas.Service;
 
 namespace server_saas
 {
@@ -63,6 +65,12 @@ namespace server_saas
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+            builder.Services.AddScoped<IArticleService, ArticleService>();
+            builder.Services.AddScoped<IGeminiAIService, GeminiAIService>();
+
+            builder.Services.AddHttpClient();
 
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
