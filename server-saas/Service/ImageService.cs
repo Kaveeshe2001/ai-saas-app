@@ -10,18 +10,18 @@ namespace server_saas.Service
     {
         private readonly IGeneratedImageRepository _imageRepo;
         private readonly IGeminiAIService _geminiService;
-        private readonly IClipDropService _clipDropService;
+        private readonly IHuggingFaceService _huggingFaceService;
 
         private static readonly List<string> PremiumStyles = new()
         {
             "Ghibli style", "Fantasy style", "3D style", "Cinematic"
         };
 
-        public ImageService(IGeneratedImageRepository imageRepo, IGeminiAIService geminiService, IClipDropService clipDropService)
+        public ImageService(IGeneratedImageRepository imageRepo, IGeminiAIService geminiService, IHuggingFaceService huggingFaceService)
         {
             _imageRepo = imageRepo;
             _geminiService = geminiService;
-            _clipDropService = clipDropService;
+            _huggingFaceService = huggingFaceService;
         }
 
         public async Task<GeneratedImage> CreateImageAsync(GenerateImageRequestDto requestDto, User user)
@@ -32,8 +32,7 @@ namespace server_saas.Service
             }
 
             //Generate Image from AI
-            //var base64Image = await _geminiService.GenerateImageAsBase64Async(requestDto.Prompt, requestDto.Style);
-            var imageBytes = await _clipDropService.GenerateImageAsync(requestDto.Prompt, requestDto.Style);
+            var imageBytes = await _huggingFaceService.GenerateImageAsync(requestDto.Prompt, requestDto.Style);
 
             //Convert the raw bytes to a Base64 string
             var base64Image = Convert.ToBase64String(imageBytes);

@@ -71,7 +71,7 @@ namespace server_saas
             builder.Services.AddScoped<IGeminiAIService, GeminiAIService>();
             builder.Services.AddScoped<IGeneratedImageRepository, GeneratedImageRepository>();
             builder.Services.AddScoped<IImageService, ImageService>();
-            builder.Services.AddScoped<IClipDropService, ClipDropService>();
+            builder.Services.AddScoped<IHuggingFaceService, HuggingFaceService>();
 
             builder.Services.AddHttpClient();
 
