@@ -7,6 +7,6 @@ namespace server_saas.Interfaces
         Task<List<GeneratedImage>> GetAllPublicAsync();
         Task<List<GeneratedImage>> GetAllByUserIdAsync(string userId);
         Task<GeneratedImage?> GetByIdAsync(int id);
-        Task<GeneratedImage> CreateAync(GeneratedImage image);
+        Task<GeneratedImage> CreateAsync(GeneratedImage image);
     }
 }
