@@ -3,6 +3,6 @@
     public interface IGeminiAIService
     {
         Task<string> GenerateArticleContentAsync(string topic, string articleLength);
-        Task<string> GenerateImageAsBase64Async(string prompt, string style);
+        //Task<string> GenerateImageAsBase64Async(string prompt, string style);
     }
 }

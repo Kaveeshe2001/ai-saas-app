@@ -15,9 +15,10 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5257",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development",
+            "GOOGLE_APPLICATION_CREDENTIALS": "D:\\My project\\ai-saas-app\\ai-saas-472306-02638f695c61.json"
+        }
     },
     "https": {
       "commandName": "Project",

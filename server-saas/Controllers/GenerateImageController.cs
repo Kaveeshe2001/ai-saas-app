@@ -46,7 +46,7 @@ namespace server_saas.Controllers
             } catch (UnauthorizedAccessException ex)
             {
                 // Catches the exception for non-premium users trying to use a premium style
-                return Forbid(ex.Message);
+                return StatusCode(403, ex.Message);
             } catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred during image generation: {ex.Message}");

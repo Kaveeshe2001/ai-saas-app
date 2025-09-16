@@ -1,6 +1,8 @@
-﻿using server_saas.Dto.GeneratedImage;
+﻿using Newtonsoft.Json.Linq;
+using server_saas.Dto.GeneratedImage;
 using server_saas.Interfaces;
 using server_saas.Models;
+using System.Buffers.Text;
 
 namespace server_saas.Service
 {
@@ -8,16 +10,18 @@ namespace server_saas.Service
     {
         private readonly IGeneratedImageRepository _imageRepo;
         private readonly IGeminiAIService _geminiService;
+        private readonly IClipDropService _clipDropService;
 
         private static readonly List<string> PremiumStyles = new()
         {
-            "Ghibli style", "Fantasy style", "3D style"
+            "Ghibli style", "Fantasy style", "3D style", "Cinematic"
         };
 
-        public ImageService(IGeneratedImageRepository imageRepo, IGeminiAIService geminiService)
+        public ImageService(IGeneratedImageRepository imageRepo, IGeminiAIService geminiService, IClipDropService clipDropService)
         {
             _imageRepo = imageRepo;
             _geminiService = geminiService;
+            _clipDropService = clipDropService;
         }
 
         public async Task<GeneratedImage> CreateImageAsync(GenerateImageRequestDto requestDto, User user)
@@ -28,7 +32,11 @@ namespace server_saas.Service
             }
 
             //Generate Image from AI
-            var base64Image = await _geminiService.GenerateImageAsBase64Async(requestDto.Prompt, requestDto.Style);
+            //var base64Image = await _geminiService.GenerateImageAsBase64Async(requestDto.Prompt, requestDto.Style);
+            var imageBytes = await _clipDropService.GenerateImageAsync(requestDto.Prompt, requestDto.Style);
+
+            //Convert the raw bytes to a Base64 string
+            var base64Image = Convert.ToBase64String(imageBytes);
 
             //Format as a Data URI to be used directly in an img tag
             var imageUrl = $"data:image/png;base64,{base64Image}";

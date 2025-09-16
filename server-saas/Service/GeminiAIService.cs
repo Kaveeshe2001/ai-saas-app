@@ -63,7 +63,7 @@ namespace server_saas.Service
         }
 
         //Generate Image
-        public async Task<string> GenerateImageAsBase64Async(string prompt, string style)
+        /*public async Task<string> GenerateImageAsBase64Async(string prompt, string style)
         {
             var apiKey = _config["Gemini:ApiKey"];
             var projectId = _config["Gemini:ProjectId"];
@@ -109,6 +109,6 @@ namespace server_saas.Service
             var base64Image = firstPrediction.GetProperty("bytesBase64Encoded").GetString();
 
             return base64Image ?? string.Empty;
-        }
+        }*/
     }
 }
