@@ -15,6 +15,7 @@ namespace server_saas.Service
             _config = config;
         }
 
+        //Generate Article
         public async Task<string> GenerateArticleContentAsync(string topic, string articleLength)
         {
             var apiKey = _config["Gemini:ApiKey"];
@@ -59,6 +60,55 @@ namespace server_saas.Service
             var generatedText = firstPart.GetProperty("text").GetString();
 
             return generatedText ?? string.Empty;
+        }
+
+        //Generate Image
+        public async Task<string> GenerateImageAsBase64Async(string prompt, string style)
+        {
+            var apiKey = _config["Gemini:ApiKey"];
+            var projectId = _config["Gemini:ProjectId"];
+            var location = _config["Gemini:Location"];
+
+            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(projectId) || string.IsNullOrEmpty(location))
+            {
+                throw new InvalidOperationException("Gemini ProjectId, Location, or ApiKey is not configured.");
+            }
+
+            var apiUrl = $"https://{location}-aiplatform.googleapis.com/v1/projects/{projectId}/locations/{location}/publishers/google/models/imagegeneration@006:predict";
+
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new("Bearer", apiKey);
+
+            var enhancedPrompt = $"{prompt}, {style} style";
+
+            var requestBody = new
+            {
+                instances = new[]
+                {
+                    new { prompt = enhancedPrompt },
+                },
+                parameters = new
+                {
+                    sampleCount = 1,
+                }
+            };
+
+            //send requestbody to Gemini API endpoint
+            var response = await client.PostAsJsonAsync(apiUrl, requestBody);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"Image generation API request failed: {errorContent}");
+            }
+
+            //parses the JSON response to navigate to the image data
+            using var jsonDoc = await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());
+            var predictions = jsonDoc.RootElement.GetProperty("predictions");
+            var firstPrediction = predictions[0];
+            var base64Image = firstPrediction.GetProperty("bytesBase64Encoded").GetString();
+
+            return base64Image ?? string.Empty;
         }
     }
 }
