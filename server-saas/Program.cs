@@ -69,6 +69,8 @@ namespace server_saas
             builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
             builder.Services.AddScoped<IArticleService, ArticleService>();
             builder.Services.AddScoped<IGeminiAIService, GeminiAIService>();
+            builder.Services.AddScoped<IGeneratedImageRepository, GeneratedImageRepository>();
+            builder.Services.AddScoped<IImageService, ImageService>();
 
             builder.Services.AddHttpClient();
 
