@@ -1,0 +1,33 @@
+.form-inner {
+ position: relative;
+ line-height: 1;
+ margin-bottom: 20px;
+ text-align: left;
+
+ label {
+  font-family: var(--font-dmsans);
+  color: var(--title-color);
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+ }
+
+ input {
+  background: var(--white-color);
+  color: var(--paragraph-color);
+  font-weight: 400;
+  height: 52px;
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  border: 1px solid rgba(var(--primary-color2-opc), .15);
+  border-radius: 5px;
+  font-family: var(--font-dmsans);
+  font-size: 14px;
+ }
+
+ input:focus {
+  border-color: var(--primary-color)
+ }
+}
