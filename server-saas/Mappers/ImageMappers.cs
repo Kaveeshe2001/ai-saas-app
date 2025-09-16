@@ -18,5 +18,11 @@ namespace server_saas.Mappers
                 CreatedAt = image.CreatedAt
             };
         }
+
+        //Convert a list of GeneratedImage entities
+        public static List<ImageResponseDto> ToImageResponseDtoList(IEnumerable<GeneratedImage> images)
+        {
+            return images.Select(ToImageResponseDto).ToList();
+        }
     }
 }
