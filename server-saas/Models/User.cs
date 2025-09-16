@@ -6,5 +6,6 @@ namespace server_saas.Models
     [Table("ApplicationUser")]
     public class User: IdentityUser
     {
+        public bool IsPremium { get; set; } = false;
     }
 }
