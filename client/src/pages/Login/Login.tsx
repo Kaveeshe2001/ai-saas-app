@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAuth } from "../../context/useAuth"
+import { useAuth } from "../../context/useAuth";
 import Form from "../../components/ui/Form/Form";
-import { Col } from "react-bootstrap";
+// DELETED: import { Col } from "react-bootstrap";
 import Input from "../../components/ui/Input/Input";
-import PrimaryButton from "../../components/ui/PrimaryButton/PrimaryButton";
+import PrimaryButton from "../../components/ui/Buttons/PrimaryButton/PrimaryButton";
 
 const Login = () => {
   const { loginUser } = useAuth();
@@ -38,30 +38,36 @@ const Login = () => {
     <div className="auth-container">
       <Form onSubmit={handleSubmit}>
         <h2 className="auth-title">Login</h2>
-        <Col md={6} className="mb-20">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 w-full">
+
+          <div>
             <Input
-                label='Username'
-                type='text'
-                placeHolder='Kaveesha'
-                id='username'
-                name='username'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                error={errors.username}
+              label='Username'
+              type='text'
+              placeHolder='Kaveesha'
+              id='username'
+              name='username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              error={errors.username}
             />
-        </Col>
-        <Col md={6}>
+          </div>
+
+          <div>
             <Input
-                label='Password'
-                type='password'
-                placeHolder='Password@123'
-                id='password'
-                name='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                error={errors.password}
+              label='Password'
+              type='password'
+              placeHolder='Password@123'
+              id='password'
+              name='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
             />
-        </Col>
+          </div>
+        </div>
+
         <div className="auth-btn">
             <PrimaryButton variant='white' text='Login' type='submit' />
         </div>

@@ -1,0 +1,31 @@
+.bid-btn {
+    color: var(--white-color);
+    font-family: var(--font-dmsans);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: 5px;
+    background-color: var(--primary-color2);
+    padding: 15px 20px;
+    transition: .5s;
+   
+   }
+   
+   .bid-btn.lg {
+    padding: 13px 20px;
+    margin-bottom: 10px;
+   }
+   
+   .bid-btn.active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+   
+   }
+   
+   .bid-btn.nonActive {
+    background-color: rgba(var(--title-color-opc), .08);
+    color: var(--title-color);
+    border: none;
+   }
