@@ -85,7 +85,7 @@ export const dummyTestimonialData = [
         name: 'David Lee',
         title: 'Content Writer, TechCorp',
         content: 'ContentAI has transformed our content creation process. The AI tools have helped us produce high-quality content faster than ever before.',
-        rating: 4,
+        rating: 3,
     },
 ]
 
