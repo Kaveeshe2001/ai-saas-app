@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../context/useAuth"
 import Form from "../../components/ui/Form/Form";
+import { Col } from "react-bootstrap";
 import Input from "../../components/ui/Input/Input";
 import PrimaryButton from "../../components/ui/Buttons/PrimaryButton/PrimaryButton";
 
@@ -29,18 +30,23 @@ const Signup = () => {
     if (!username) {
         newErrors.username = 'Username is required';
     }
+
     if (!email) {
-        newErrors.email = 'Email is required';
+      newErrors.email = 'Email is required';
     }
+
     if (!password) {
-        newErrors.password = 'Password is required';
+      newErrors.password = 'Password is required';
     }
+
     if (!confirmPassword) {
-        newErrors.confirmPassword = 'Confirm Password is Required';
+      newErrors.confirmPassword = 'Confirm Password is Required';
     }
+
     if (password !== confirmPassword) {
-        newErrors.confirmPassword = "Passwords don't match"; // Fixed to apply error to the correct field
+      newErrors.password = "Passwords dosen't match";
     }
+
     if (Object.keys(newErrors).length > 0) {
         setErrors(newErrors);
     } else {
@@ -53,64 +59,53 @@ const Signup = () => {
     <div className="auth-container">
       <Form onSubmit={handleSubmit}>
         <h2 className="auth-title">Sign Up</h2>
-
-        {/* This parent div creates the responsive grid layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 w-full">
-          
-          {/* This div spans 2 columns on medium screens to match md={12} */}
-          <div className="md:col-span-2">
+        <Col md={12} className="mb-20">
             <Input
-              label='Username'
-              type='text'
-              placeHolder='Kaveesha'
-              id='username'
-              name='username'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              error={errors.username}
+                label='Username'
+                type='text'
+                placeHolder='Kaveesha'
+                id='username'
+                name='username'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                error={errors.username}
             />
-          </div>
-
-          <div>
+        </Col>
+        <Col md={6}>
             <Input
-              label='Email'
-              type='email'
-              placeHolder='example@gmail.com'
-              id='email'
-              name='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              error={errors.email}
+                label='Email'
+                type='email'
+                placeHolder='example@gmail.com'
+                id='email'
+                name='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={errors.email}
             />
-          </div>
-          
-          <div>
+        </Col>
+        <Col md={6}>
             <Input
-              label='Password'
-              type='password'
-              placeHolder='Password@123'
-              id='password'
-              name='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              error={errors.password}
+                label='Password'
+                type='password'
+                placeHolder='Password@123'
+                id='password'
+                name='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={errors.password}
             />
-          </div>
-          
-          <div>
+        </Col>
+        <Col md={6}>
             <Input
-              label='Confirm Password'
-              type='password'
-              placeHolder='Password@123'
-              id='cpassword'
-              name='cpassword'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              error={errors.confirmPassword}
+                label='Confirm Password'
+                type='password'
+                placeHolder='Password@123'
+                id='cpassword'
+                name='cpassword'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
             />
-          </div>
-        </div>
-
+        </Col>
         <div className="auth-btn">
             <PrimaryButton variant="white" text="Sign Up" type="submit" />
         </div>

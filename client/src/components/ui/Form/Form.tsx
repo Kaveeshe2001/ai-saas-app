@@ -1,3 +1,4 @@
+import { Row } from 'react-bootstrap';
 import './form.css';
 
 type FormProps = {
@@ -9,9 +10,7 @@ const Form: React.FC<FormProps> = ({ children, onSubmit }) => {
   return (
     <div className='form'>
         <form onSubmit={onSubmit}>
-            <div className='flex flex-wrap -mx-3'>
-                {children}
-            </div>
+            <Row>{children}</Row>
         </form>
     </div>
   )
