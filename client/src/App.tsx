@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom"
 import { UserProvider } from "./providers/UserProvider"
 import { ToastContainer } from "react-toastify"
 import Navbar from "./components/Shared/Navbar"
+import Footer from "./components/Shared/Footer";
 
 const App = () => {
   const location = useLocation();
@@ -13,6 +14,7 @@ const App = () => {
           {showNavbar && <Navbar />}
           <Outlet />
           <ToastContainer />
+          <Footer />
       </UserProvider>
     </>
   );
