@@ -5,13 +5,17 @@ interface SubscriptionCardProps {
     price: string;
     features: string[];
     isActive: boolean;
+    isPremiumCard: boolean;
+    isLoggedIn: boolean;
+    onButtonClick: () => void;
 }
 
 const SubscriptionCard = ({
     title,
     price,
     features,
-    isActive
+    isActive,
+    onButtonClick
 }: SubscriptionCardProps) => {
   return (
     <div className={`relative border-2 rounded-lg p-8 shadow-lg transition-transform hover:scale-105 ${isActive ? 'border-green-500' : 'border-gray-300'}`}>
@@ -35,7 +39,7 @@ const SubscriptionCard = ({
 
         <div className="text-center">
             {!isActive && (
-                <SecondaryButton variant="nonActive" text="Subscribe" type="submit" />
+                <SecondaryButton variant="nonActive" text="Subscribe" type="submit" onClick={onButtonClick} />
             )}
         </div>
     </div>
