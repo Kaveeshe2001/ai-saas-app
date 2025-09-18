@@ -5,6 +5,7 @@ import Signup from "../pages/Signup/Signup";
 import Home from "../pages/Home";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile/Profile";
+import WriteArticle from "../pages/Dashboard/WriteArticle";
 
 export const router = createBrowserRouter([
     {
@@ -19,6 +20,14 @@ export const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <Profile />
+                    </ProtectedRoute>
+                )
+            },
+            {
+                path: 'write-article',
+                element: (
+                    <ProtectedRoute>
+                        <WriteArticle />
                     </ProtectedRoute>
                 )
             }

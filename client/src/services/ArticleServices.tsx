@@ -14,7 +14,7 @@ export const articleGenerateAPI = async (topic: string, articleLength: string) =
         };
 
         const response = await axios.post<Article>(
-            `${api}/articles`,
+            `${api}article`,
             articleData,
             {
                 headers: {
@@ -33,7 +33,7 @@ export const getMyArticlesAPI = async () => {
     try {
         const token = localStorage.getItem('token');
         
-        const response = await axios.get<Article[]>(`${api}/article`, {
+        const response = await axios.get<Article[]>(`${api}article`, {
             headers: { Authorization: `Bearer ${token}` }
         });
         return response.data;
