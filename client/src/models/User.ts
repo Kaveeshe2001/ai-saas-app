@@ -3,6 +3,7 @@ export type UserProfileToken = {
     userName: string;
     email: string;
     token: string;
+    isPremium: boolean;
 };
 
 export type UserProfile = {
