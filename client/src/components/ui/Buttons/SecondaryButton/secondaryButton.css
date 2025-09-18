@@ -9,7 +9,7 @@
     background-color: var(--primary-color2);
     padding: 15px 20px;
     transition: .5s;
-   
+    cursor: pointer;
    }
    
    .bid-btn.lg {

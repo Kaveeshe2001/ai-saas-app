@@ -29,7 +29,7 @@ const SubscriptionCard = ({
             )}
 
             <h3 className="text-2xl font-semibold">{title}</h3>
-            <p className="text-3xl font-semibold">{price} <span className="text-xl text-gray-800">/month</span></p>
+            <p className="text-3xl font-semibold">{price} <span className="text-xl text-slate-500">/month</span></p>
             <p className="text-gray-500 mb-2">{description}</p>
         </div>
 
