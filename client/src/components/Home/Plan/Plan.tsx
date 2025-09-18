@@ -58,7 +58,8 @@ const Plan = () => {
             {/* Free Card */}
             <SubscriptionCard
                 title="Free Plan"
-                price="$0/mo"
+                price="$0"
+                description="Always free"
                 features={features.free}
                 isPremiumCard={false}
                 isActive={isLoggedIn() && !isPremium}
@@ -69,7 +70,8 @@ const Plan = () => {
             {/* Premium Card */}
             <SubscriptionCard
                 title="Premium Plan"
-                price="$10/mo"
+                price="$10"
+                description="Only billed monthly"
                 features={features.premium}
                 isPremiumCard={true}
                 isActive={isLoggedIn() && isPremium}
