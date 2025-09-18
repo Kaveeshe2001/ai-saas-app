@@ -25,15 +25,15 @@ const Profile = () => {
     switch (snap.dashboardSelected) {
         case 'Dashboard':
             return <Dashboard />;
-        case 'Write Article':
+        case 'WriteArticle':
             return <WriteArticle />;
-        case 'Generate Image':
+        case 'GenerateImage':
             return <GenerateImages />;
-        case 'Remove Background':
+        case 'RemoveBackground':
             return <RemoveBackground />
-        case 'Remove Object':
+        case 'RemoveObject':
             return <RemoveObject />
-        case 'Review Resume':
+        case 'ReviewResume':
             return <ReviewResume />
         case 'Community':
             return <Community />
@@ -46,11 +46,11 @@ const Profile = () => {
   };
 
   return (
-    <div className="dashboard-section mb-60 pt-60">
+    <div className="dashboard-section mb-20 pt-90 mr-40">
       <Container>
         <div className="dashboard-wrapper">
             <DashboardSidebar links={UserDashboard} />
-            <div className="dashboard-content-wrap">{renderComponent()}</div>
+            <div className="dashboard-content-wrap ml-8">{renderComponent()}</div>
         </div>
       </Container>
     </div>

@@ -558,8 +558,10 @@ a {
 
 
 .auth-title {
-  color: var(--white-color);
+  color: var(--title-color);
   margin-bottom: 40px;
+  font-weight: 700;
+  font-size: 30px;
 }
 
 .auth-btn {

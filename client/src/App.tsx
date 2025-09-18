@@ -14,7 +14,7 @@ const App = () => {
           {showNavbar && <Navbar />}
           <Outlet />
           <ToastContainer />
-          <Footer />
+          {showNavbar && <Footer />}
       </UserProvider>
     </>
   );

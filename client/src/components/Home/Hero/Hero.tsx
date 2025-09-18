@@ -15,7 +15,7 @@ const Hero = () => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-4 text-sm max-sm:text-xs">
-            <SecondaryButton variant="active" text="Start creating now" link="/" />
+            <SecondaryButton variant="active" text="Start creating now" link="/dashboard" />
             <SecondaryButton variant="nonActive" text="Watch demo" link="/" />
         </div>
 

@@ -1,6 +1,7 @@
 import type { RemixiconComponentType } from "@remixicon/react";
 import { useSnapshot } from "valtio";
 import state from "../../../store";
+import './sidebar.css'
 
 type Links = {
     item: string;
@@ -25,7 +26,7 @@ const DashboardSidebar = ({ links }: Props) => {
                 snap.dashboardSelected === link.component ? 'active' : ''
               }`}
             >
-                <a onClick={() => (state.dashboardSelected = link.component)}>
+                <a className="flex gap-2 cursor-pointer" onClick={() => (state.dashboardSelected = link.component)}>
                     {link.icon && <link.icon />}
                     <h6>{link.item}</h6>
                 </a>
