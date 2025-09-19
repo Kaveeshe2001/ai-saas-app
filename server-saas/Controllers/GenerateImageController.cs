@@ -93,5 +93,20 @@ namespace server_saas.Controllers
 
             return Ok(ImageMappers.ToImageResponseDto(image));
         }
+
+        [HttpPost("save")]
+        [Authorize]
+        public async Task<IActionResult> SaveImage([FromBody] SaveImageRequestDto requestDto)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var newImage = await _imageService.SaveImageRecordAsync(requestDto, user);
+
+            return Ok(ImageMappers.ToImageResponseDto(newImage));
+        }
     }
 }

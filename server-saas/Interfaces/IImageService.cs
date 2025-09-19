@@ -9,5 +9,7 @@ namespace server_saas.Interfaces
         Task<List<GeneratedImage>> GetAllImagesForUserAsync(string userId);
         Task<GeneratedImage?> GetImageByIdAsync(int id, string userId);
         Task<GeneratedImage> CreateImageAsync(GenerateImageRequestDto requestDto, User user);
+        Task<GeneratedImage> SaveImageRecordAsync(SaveImageRequestDto requestDto, User user);
+
     }
 }

@@ -1,4 +1,9 @@
-﻿using server_saas.Interfaces;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using server_saas.Interfaces;
+using server_saas.Models;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Numerics;
 using System.Text.Json;
 
 namespace server_saas.Service
@@ -27,7 +32,19 @@ namespace server_saas.Service
             var apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}";
             var client = _httpClientFactory.CreateClient();
 
-            var promptText = $"You are a professional blog author. Write a {articleLength} article about: '{topic}'.";
+            var promptText = $@"You are an expert blog author and content creator known for writing clear, engaging, and well-structured articles.
+
+            Your task is to write a {articleLength} article on the topic: '{topic}'.
+
+            Please adhere to the following structure and formatting guidelines:
+            1.  **Overall Structure:** Start with a captivating introduction, explore 3-4 key subtopics in the body, and end with a strong concluding summary.
+            2.  **Formatting:** Use Markdown for all formatting.
+                - The main title should be a Level 1 Heading and bold (e.g. My Article Title).
+                - Each subtopic must be a Level 2 Heading bold (e.g. My Subtopic).
+                - Use **bold** for key terms and important concepts.
+                - Include at least one bulleted list or numbered list to present steps, tips, or benefits.
+            3.  **Tone:** Write in a professional, informative, and engaging tone that is easy for a general audience to understand.
+            ";
 
             var requestBody = new
             {

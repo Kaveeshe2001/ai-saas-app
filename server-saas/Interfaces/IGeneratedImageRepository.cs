@@ -1,4 +1,5 @@
-﻿using server_saas.Models;
+﻿using server_saas.Dto.GeneratedImage;
+using server_saas.Models;
 
 namespace server_saas.Interfaces
 {

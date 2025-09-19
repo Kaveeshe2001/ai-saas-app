@@ -82,5 +82,20 @@ namespace server_saas.Service
             // If the image is private and the user is not the owner, deny access.
             return null;
         }
+
+        public async Task<GeneratedImage> SaveImageRecordAsync(SaveImageRequestDto requestDto, User user)
+        {
+            var newImage = new GeneratedImage
+            {
+                Prompt = requestDto.Prompt,
+                Style = requestDto.Style,
+                ImageUrl = requestDto.ImageUrl,
+                IsPublic = requestDto.IsPublic,
+                UserId = user.Id,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            return await _imageRepo.CreateAsync(newImage);
+        }
     }
 }
