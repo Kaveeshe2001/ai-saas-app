@@ -6,6 +6,7 @@ import Home from "../pages/Home";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile/Profile";
 import WriteArticle from "../pages/Dashboard/WriteArticle";
+import GenerateImages from "../pages/Dashboard/GenerateImages";
 
 export const router = createBrowserRouter([
     {
@@ -28,6 +29,14 @@ export const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <WriteArticle />
+                    </ProtectedRoute>
+                )
+            },
+            {
+                path: 'generate-images',
+                element: (
+                    <ProtectedRoute>
+                        <GenerateImages />
                     </ProtectedRoute>
                 )
             }

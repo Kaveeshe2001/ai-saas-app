@@ -30,27 +30,12 @@ const GenerateImages = () => {
   const [makePublic, setMakePublic] = useState(false);
   const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState<{
-    topic?: string;
-  }>({});
 
   const availableStyles = isPremium ? allStyles : freeStyles;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newErrors: {topic?: string;} = {};
-
-    if (!prompt) {
-        newErrors.topic = "Please describe the image you want to generate.";
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-        setErrors(newErrors);
-    } else {
-        setErrors({});
-    }
-
-    setErrors({});
+    
     setIsLoading(true);
     setGeneratedImageUrl(null);
 

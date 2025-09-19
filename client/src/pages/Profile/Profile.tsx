@@ -27,7 +27,7 @@ const Profile = () => {
             return <Dashboard />;
         case 'WriteArticle':
             return <WriteArticle />;
-        case 'GenerateImage':
+        case 'GenerateImages':
             return <GenerateImages />;
         case 'RemoveBackground':
             return <RemoveBackground />
