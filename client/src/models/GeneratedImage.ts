@@ -1,7 +1,6 @@
 export type GeneratedImagePost = {
     prompt: string;
     style: string;
-    isPublic: boolean;
 }
 
 export type AIImageResponse = {

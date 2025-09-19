@@ -1,13 +1,13 @@
 import axios from "axios";
-import { AIImageResponse, type CloudinarySignature, type GeneratedImagePost, type SaveImagePost } from "../models/GeneratedImage";
+import type { AIImageResponse, CloudinarySignature, GeneratedImagePost, SaveImagePost } from "../models/GeneratedImage";
 import { handleError } from "../handlers/ErrorHandler";
 
 const api = 'http://localhost:5257/server_saas/';
 
-export const generatedAIImageAPI = async (prompt: string, style: string, isPublic: boolean) => {
+export const generatedAIImageAPI = async (prompt: string, style: string) => {
     try {
         const token = localStorage.getItem('token');
-        const postData: GeneratedImagePost = { prompt, style, isPublic };
+        const postData: GeneratedImagePost = { prompt, style };
 
         const response = await axios.post<AIImageResponse>(`${api}generate-images/generate`, postData, {
             headers: { Authorization: `Bearer ${token}` },

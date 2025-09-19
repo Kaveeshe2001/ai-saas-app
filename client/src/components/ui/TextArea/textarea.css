@@ -1,0 +1,12 @@
+textarea {
+ background: var(--white-color);
+ color: var(--paragraph-color);
+ font-family: var(--font-dmsans);
+ font-size: 14px !important;
+ font-weight: 400;
+ width: 100%;
+ padding: 20px;
+ outline: none;
+ border: 1px solid rgba(var(--primary-color2-opc), .15);
+ min-height: 120px;
+}
