@@ -1,10 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
 import { useAuth } from "../../context/useAuth";
-import { generatedAIImageAPI, getCloudinarySignatureAPI, saveImageToDB_API } from "../../services/GeneratedImageService";
+import { generatedAIImageAPI, getCloudinarySignatureAPI } from "../../services/GeneratedImageService";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ConfigurationForm from "./_components/ConfigurationForm";
 import DisplayImage from "./_components/DisplayImage";
+import apiClient from "../../services/apiClient";
 
 const base64ToFile = (base64: string, filename: string): File => {
     const arr = base64.split(',');
@@ -68,7 +69,13 @@ const GenerateImages = () => {
       const finalImageUrl = cloudinaryResponse.data.secure_url;
 
       //Save the final Url and details to DB
-      await saveImageToDB_API({ prompt, style: selectedStyle, imageUrl: finalImageUrl, isPublic: makePublic });
+      //await saveImageToDB_API({ prompt, style: selectedStyle, imageUrl: finalImageUrl, isPublic: makePublic });
+      await apiClient.post('/generate-images/save', { 
+          prompt, 
+          style: selectedStyle, 
+          imageUrl: finalImageUrl, 
+          isPublic: makePublic 
+      });
 
       //display Image
       setGeneratedImageUrl(finalImageUrl);
@@ -80,10 +87,10 @@ const GenerateImages = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [prompt, selectedStyle, makePublic]);
+  }, [prompt, selectedStyle, makePublic, isPremium]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-8">
+    <div className="bg-gray-50 flex items-center justify-center p-8">
       <div className="max-w-xl w-full">
         {isLoading ? (
           <div className="text-center text-gray-600">

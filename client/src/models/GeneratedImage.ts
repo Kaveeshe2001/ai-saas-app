@@ -21,3 +21,11 @@ export interface SaveImagePost {
     imageUrl: string; 
     isPublic: boolean;
 }
+
+export interface PublicImage {
+    id: string;
+    prompt: string;
+    style: string;
+    imageUrl: string;
+    userName: string;
+}
