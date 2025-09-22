@@ -7,6 +7,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile/Profile";
 import WriteArticle from "../pages/Dashboard/WriteArticle";
 import GenerateImages from "../pages/Dashboard/GenerateImages";
+import Community from "../pages/Dashboard/Community";
 
 export const router = createBrowserRouter([
     {
@@ -39,7 +40,15 @@ export const router = createBrowserRouter([
                         <GenerateImages />
                     </ProtectedRoute>
                 )
-            }
+            },
+            {
+                path: 'community',
+                element: (
+                    <ProtectedRoute>
+                        <Community />
+                    </ProtectedRoute>
+                )
+            },
         ]
     }
 ]);
