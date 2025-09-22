@@ -28,4 +28,6 @@ export interface PublicImage {
     style: string;
     imageUrl: string;
     userName: string;
+    likes: number;
+    isLikedByCurrentUser: boolean;
 }
