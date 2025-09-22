@@ -45,4 +45,14 @@ export const getPublicImageAPI = async () => {
         handleError(error);
         throw error;
     }
+};
+
+export const likeImageAPI = async (imageId: string | number) => {
+    try {
+        const response = await apiClient.post<{ newLikeCount: number }>(`${imageEndpoint}/${imageId}/like`);
+        return response.data;
+    } catch (error) {
+        handleError(error);
+        throw error;
+    }
 }
