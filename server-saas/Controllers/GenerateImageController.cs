@@ -108,5 +108,22 @@ namespace server_saas.Controllers
 
             return Ok(ImageMappers.ToImageResponseDto(newImage));
         }
+
+        [HttpPost("{imageId:int}/like")]
+        [Authorize]
+        public async Task<IActionResult> LikeImage([FromRoute] int imageId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Unauthorized();
+
+            try
+            {
+                var newLikeCount = await _imageService.ToggleLikeAsync(imageId, user.Id);
+                return Ok(new { newLikeCount });
+            } catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

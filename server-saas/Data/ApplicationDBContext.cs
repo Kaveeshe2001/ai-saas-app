@@ -16,6 +16,12 @@ namespace server_saas.Data
             builder.Entity<ImageLike>()
                 .HasKey(p => new { p.UserId, p.GeneratedImageId });
 
+            builder.Entity<GeneratedImage>()
+                .HasOne(g => g.User) 
+                .WithMany() 
+                .HasForeignKey(g => g.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
