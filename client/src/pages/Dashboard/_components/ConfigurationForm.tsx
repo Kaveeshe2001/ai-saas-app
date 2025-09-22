@@ -25,29 +25,36 @@ const ConfigurationForm = ({
     allStyles,
     makePublic,
     setMakePublic,
-    handleSubmit,
+    handleSubmit: parentHandleSubmit,
     isLoading,
     isPremium,
 }: ConfigurationFormProps) => {
-  
-  const premiumStyles = ["Ghibli style", "Fantasy style", "3D style", "Cinematic"];
+  const premiumStyles = allStyles.filter(style => 
+    !["Realistic", "Cartoon style", "Portrait style"].includes(style)
+  );
+
   const [errors, setErrors] = useState<{
     prompt?: string;
   }>({});
 
-  const newErrors: {prompt?: string;} = {};
-  
-  if (!prompt) {
+  const handleLocalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setErrors({});
+    const newErrors: {prompt?: string;} = {};
+
+    if (!prompt.trim()) {
       newErrors.prompt = "Please describe the image you want to generate.";
-  }
-  
-  if (Object.keys(newErrors).length > 0) {
+    }
+
+    // If there are errors, set them and stop.
+    if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-  } else {
-      setErrors({});
+      return;
+    }
+
+    parentHandleSubmit(e);
   }
-  
-  setErrors({});
 
   return (
     <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
@@ -56,7 +63,7 @@ const ConfigurationForm = ({
         <h2 className="text-2xl font-bold text-gray-800">Generate Your Image</h2>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLocalSubmit}>
         <div className="mb-6">
           <Textarea
             id='prompt'
