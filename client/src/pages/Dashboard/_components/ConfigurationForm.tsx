@@ -58,8 +58,8 @@ const ConfigurationForm = ({
 
   return (
     <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
-      <div className="flex items-center gap-3 mb-6 text-blue-600">
-        <RiSparkling2Fill size={24} />
+      <div className="flex items-center gap-3 mb-6 text-[var(--primary-color)]">
+        <RiSparkling2Fill size={30} />
         <h2 className="text-2xl font-bold text-gray-800">Generate Your Image</h2>
       </div>
 
@@ -76,7 +76,7 @@ const ConfigurationForm = ({
         </div>
 
         <div className="mb-8">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-[15px] font-semibold text-[var(--title-color)] mb-2">
               Style
           </label>
           <div className="flex flex-wrap gap-3">
@@ -92,7 +92,7 @@ const ConfigurationForm = ({
                     disabled={!isAvailable}
                     className={`relative px-4 py-2 text-sm font-semibold rounded-md transition-colors flex items-center gap-2 ${
                         selectedStyle === style
-                            ? 'bg-blue-500 text-white'
+                            ? 'text-gary-700 border border-[var(--primary-color)]'
                             : isAvailable
                             ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             : 'bg-gray-50 text-gray-400 cursor-not-allowed'
@@ -119,14 +119,14 @@ const ConfigurationForm = ({
                   onChange={(e) => setMakePublic(e.target.checked)}
                   className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+              <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-green-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[var(--primary-color)]"></div>
           </label>
         </div>
 
         <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-300 flex items-center justify-center gap-2 transition-colors"
+            className="w-full bg-[var(--primary-color)] text-white font-bold cursor-pointer py-3 px-4 rounded-md hover:bg-green-800 disabled:bg-green-300 flex items-center justify-center gap-2 transition-colors"
         >
             {isLoading ? (
                  <>

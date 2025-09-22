@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { articleGenerateAPI } from "../../services/ArticleServices";
-import { RiBardLine, RiFileEditLine } from "@remixicon/react";
+import { RiFileEditLine, RiSparkling2Fill } from "@remixicon/react";
 import Input from "../../components/ui/Input/Input";
 
 const articleLengths = ["Short (500-800 word)", "Medium (800-1200 word)", "Long (1200+ word)"];
@@ -50,7 +50,7 @@ const WriteArticle = () => {
         {/* Left side configuration panel */}
         <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-[var(--primary-color)]"><RiBardLine /></span>
+            <span className="text-[var(--primary-color)]"><RiSparkling2Fill /></span>
             <h2 className="text-2xl font-bold text-gray-800">Article Configuration</h2>
           </div>
 
