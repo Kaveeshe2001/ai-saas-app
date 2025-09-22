@@ -13,6 +13,9 @@ namespace server_saas.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<ImageLike>()
+                .HasKey(p => new { p.UserId, p.GeneratedImageId });
+
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
@@ -32,6 +35,7 @@ namespace server_saas.Data
         }
 
         public DbSet<Article> Articles { get; set; }
+        public DbSet<ImageLike> ImageLikes { get; set; }
         public DbSet<GeneratedImage> GeneratedImages { get; set; }
     }
 }

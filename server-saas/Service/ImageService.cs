@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+using server_saas.Data;
 using server_saas.Dto.GeneratedImage;
 using server_saas.Interfaces;
 using server_saas.Models;
@@ -11,17 +13,19 @@ namespace server_saas.Service
         private readonly IGeneratedImageRepository _imageRepo;
         private readonly IGeminiAIService _geminiService;
         private readonly IHuggingFaceService _huggingFaceService;
+        private readonly ApplicationDBContext _context;
 
         private static readonly List<string> PremiumStyles = new()
         {
             "Ghibli style", "Fantasy style", "3D style", "Cinematic"
         };
 
-        public ImageService(IGeneratedImageRepository imageRepo, IGeminiAIService geminiService, IHuggingFaceService huggingFaceService)
+        public ImageService(ApplicationDBContext context, IGeneratedImageRepository imageRepo, IGeminiAIService geminiService, IHuggingFaceService huggingFaceService)
         {
             _imageRepo = imageRepo;
             _geminiService = geminiService;
             _huggingFaceService = huggingFaceService;
+            _context = context;
         }
 
         public async Task<GeneratedImage> CreateImageAsync(GenerateImageRequestDto requestDto, User user)
@@ -96,6 +100,32 @@ namespace server_saas.Service
             };
 
             return await _imageRepo.CreateAsync(newImage);
+        }
+
+        public async Task<int> ToggleLikeAsync(int imageId, string userId)
+        {
+            var image = await _context.GeneratedImages.FindAsync(imageId);
+            if (image == null)
+            {
+                throw new KeyNotFoundException("Image not found.");
+            }
+
+            var existingLike = await _context.ImageLikes
+                .FirstOrDefaultAsync(l => l.GeneratedImageId == imageId && l.UserId == userId);
+
+            if (existingLike != null)
+            {
+                _context.ImageLikes.Remove(existingLike);
+                image.Likes--;
+            } else
+            {
+                var newLike = new ImageLike { GeneratedImageId = imageId, UserId = userId };
+                await _context.ImageLikes.AddAsync(newLike);
+                image.Likes++;
+            }
+
+            await _context.SaveChangesAsync();
+            return image.Likes;
         }
     }
 }

@@ -13,7 +13,9 @@ namespace server_saas.Models
         [Required]
         public string ImageUrl { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
+        public int Likes { get; set; }
         public string UserId { get; set; } = string.Empty;
         public User User { get; set; } = null!;
+        public ICollection<ImageLike> ImageLikes { get; set; } = new List<ImageLike>();
     }
 }
