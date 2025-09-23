@@ -43,5 +43,6 @@ namespace server_saas.Data
         public DbSet<Article> Articles { get; set; }
         public DbSet<ImageLike> ImageLikes { get; set; }
         public DbSet<GeneratedImage> GeneratedImages { get; set; }
+        public DbSet<ResumeReview> ResumeReviews { get; set; }
     }
 }
