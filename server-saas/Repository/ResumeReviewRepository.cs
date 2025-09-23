@@ -26,6 +26,14 @@ namespace server_saas.Repository
             return review;
         }
 
+        public async Task<List<ResumeReview>> GetAllByUserIdAsync(string userId)
+        {
+            return await _context.ResumeReviews
+                .Where(r => r.UserId == userId)
+                .OrderByDescending(r => r.CreatedAt)
+                .ToListAsync();
+        }
+
         public async Task<ResumeReview?> GetByIdAsync(int id)
         {
             return await _context.ResumeReviews.FirstOrDefaultAsync(x => x.Id == id);

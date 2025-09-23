@@ -6,6 +6,7 @@ namespace server_saas.Interfaces
     {
         Task<ResumeReview> CreateAsync(ResumeReview review);
         Task<List<ResumeReview>> GetAllAsync();
+        Task<List<ResumeReview>> GetAllByUserIdAsync(string userId);
         Task<ResumeReview?> GetByIdAsync(int id);
 
     }

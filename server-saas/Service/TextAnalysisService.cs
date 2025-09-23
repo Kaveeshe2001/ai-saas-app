@@ -87,6 +87,11 @@ namespace server_saas.Service
             return await _reviewRepo.CreateAsync(newReview);
         }
 
+        public async Task<List<ResumeReview>> GetAllReviewsForUserAsync(string userId)
+        {
+            return await _reviewRepo.GetAllByUserIdAsync(userId);
+        }
+
         public async Task<ResumeReview?> GetReviewByIdAsync(int id)
         {
             return await _reviewRepo.GetByIdAsync(id);
