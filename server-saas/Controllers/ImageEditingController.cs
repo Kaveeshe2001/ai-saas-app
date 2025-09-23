@@ -9,12 +9,12 @@ namespace server_saas.Controllers
 {
     [Route("server_saas/image-editing")]
     [ApiController]
-    public class BEditedImageController : Controller
+    public class ImageEditingController : Controller
     {
-        private readonly IBEditedImageService _imageEditingService;
+        private readonly IImageEditingService _imageEditingService;
         private readonly UserManager<User> _userManager;
 
-        public BEditedImageController(IBEditedImageService imageEditingService, UserManager<User> userManager)
+        public ImageEditingController(IImageEditingService imageEditingService, UserManager<User> userManager)
         {
             _imageEditingService = imageEditingService;
             _userManager = userManager;
@@ -32,9 +32,33 @@ namespace server_saas.Controllers
             try
             {
                 var newImageRecord = await _imageEditingService.RemoveBackgroundAsync(imageFile, user);
-                var responseDto = BEditedImageMappers.ToBEditedImageDto(newImageRecord);
+                var responseDto = EditedImageMappers.ToEditedImageDto(newImageRecord);
                 return Ok(responseDto);
             } catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+        [HttpPost("remove-object")]
+        [Authorize]
+        public async Task<IActionResult> RemoveObject([FromForm] IFormFile imageFile, [FromForm] IFormFile maskFile)
+        {
+            if (imageFile == null || maskFile == null)
+            {
+                return BadRequest("Both an image file and a mask file are required.");
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Unauthorized();
+
+            try
+            {
+                var newImageRecord = await _imageEditingService.RemoveObjectAsync(imageFile, maskFile, user);
+                var responseDto = EditedImageMappers.ToEditedImageDto(newImageRecord);
+                return Ok(responseDto);
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }

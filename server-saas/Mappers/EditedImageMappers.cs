@@ -3,11 +3,11 @@ using server_saas.Models;
 
 namespace server_saas.Mappers
 {
-    public static class BEditedImageMappers
+    public static class EditedImageMappers
     {
-        public static BEditedImageDto ToBEditedImageDto(BEditedImage bEditedImage)
+        public static EditedImageDto ToEditedImageDto(EditedImage bEditedImage)
         {
-            return new BEditedImageDto
+            return new EditedImageDto
             {
                 Id = bEditedImage.Id,
                 ProcessedImageUrl = bEditedImage.ProcessedImageUrl,
