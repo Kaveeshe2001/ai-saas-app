@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using server_saas.Dto.RemoveObject;
+using server_saas.Extentions;
 using server_saas.Interfaces;
 using server_saas.Mappers;
 using server_saas.Models;
@@ -27,8 +28,13 @@ namespace server_saas.Controllers
         {
             if (imageFile == null || imageFile.Length == 0) return BadRequest("No image file provided.");
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return Unauthorized();
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return NotFound("User cannot be found");
+            }
 
             try
             {
@@ -50,8 +56,13 @@ namespace server_saas.Controllers
                 return BadRequest("Both an image file and a mask file are required.");
             }
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return Unauthorized();
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return NotFound("User cannot be found");
+            }
 
             try
             {

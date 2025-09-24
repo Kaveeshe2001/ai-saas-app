@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using server_saas.Extentions;
 using server_saas.Interfaces;
 using server_saas.Mappers;
 using server_saas.Models;
@@ -27,8 +28,13 @@ namespace server_saas.Controllers
         {
             if (resumeFile == null || resumeFile.Length == 0) return BadRequest("No resume file provided.");
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return Unauthorized();
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return NotFound("User cannot be found");
+            }
 
             try
             {
@@ -46,8 +52,13 @@ namespace server_saas.Controllers
         [Authorize]
         public async Task<IActionResult> GetMyReview()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return Unauthorized();
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return NotFound("User cannot be found");
+            }
 
             var reviews = await _textAnalysisService.GetAllReviewsForUserAsync(user.Id);
             var reviewDtos = reviews.Select(ResumeReviewMapper.ToResumeReviewResponseDto);
@@ -58,8 +69,13 @@ namespace server_saas.Controllers
         [Authorize]
         public async Task<IActionResult> GetReviewById(int id)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return Unauthorized();
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return NotFound("User cannot be found");
+            }
 
             var review = await _textAnalysisService.GetReviewByIdAsync(id);
             if (review == null) return NotFound();

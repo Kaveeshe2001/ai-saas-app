@@ -67,11 +67,12 @@ namespace server_saas.Controllers
         [Authorize]
         public async Task<IActionResult> GetMyImages()
         {
-            var user = await _userManager.FindByNameAsync(User.GetUsername());
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
 
             if (user == null)
             {
-                return Unauthorized();
+                return NotFound("User cannot be found");
             }
 
             var images = await _imageService.GetAllImagesForUserAsync(user.Id);
@@ -98,10 +99,12 @@ namespace server_saas.Controllers
         [Authorize]
         public async Task<IActionResult> SaveImage([FromBody] SaveImageRequestDto requestDto)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+
             if (user == null)
             {
-                return Unauthorized();
+                return NotFound("User cannot be found");
             }
 
             var newImage = await _imageService.SaveImageRecordAsync(requestDto, user);
@@ -113,8 +116,13 @@ namespace server_saas.Controllers
         [Authorize]
         public async Task<IActionResult> LikeImage([FromRoute] int imageId)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return Unauthorized();
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return NotFound("User cannot be found");
+            }
 
             try
             {
