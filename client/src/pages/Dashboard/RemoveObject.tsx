@@ -35,13 +35,21 @@ const RemoveObject = () => {
       const img = new Image();
       img.src = URL.createObjectURL(originalImage);
       img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        maskCanvas.width = img.width;
-        maskCanvas.height = img.height;
-        ctx?.drawImage(img, 0, 0);
+        const maxWidth = 500; // Define a max width for your canvas display
+        const scale = Math.min(maxWidth / img.width, 1);
+        const scaledWidth = img.width * scale;
+        const scaledHeight = img.height * scale;
+
+        canvas.width = scaledWidth;
+        canvas.height = scaledHeight;
+        maskCanvas.width = scaledWidth;
+        maskCanvas.height = scaledHeight;
+
+        // Draw the scaled image
+        ctx?.drawImage(img, 0, 0, scaledWidth, scaledHeight);
+                
         maskCtx!.fillStyle = 'black';
-        maskCtx?.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
+        maskCtx?.fillRect(0, 0, scaledWidth, scaledHeight);
       };
     }
   }, [originalImage]);
