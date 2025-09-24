@@ -150,11 +150,12 @@ const RemoveObject = () => {
           <span className="text-[var(--primary-color)]"><RiSparkling2Fill /></span>
           <h2 className="text-2xl font-bold text-gray-800">Remove Object From Image</h2>
         </div>
-        <h2 className="text-lg font-semibold text-[var(--title-color)] mb-4">Upload Your Image</h2>
+        <h2 className="text-lg font-semibold text-gray-700 mb-4">Upload Your Image</h2>
         <input type="file" id="imageUpload" accept="image/*" onChange={handleFileChange} className="hidden" />
-        <label htmlFor="imageUpload" className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed cursor-pointer">
+        <label htmlFor="imageUpload" className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
           <RiUploadCloud2Line size={48} className="text-gray-400" />
-          <span className="mt-2 text-sm text-gray-500">Click to Upload</span>
+          <span className="mt-2 text-sm text-gray-500">Click to Upload or Drag & Drop</span>
+          <span className="text-xs text-gray-400 mt-1">Supports PNG, JPG, JPEG, WebP</span>
         </label>
       </div>
     </div>

@@ -97,8 +97,8 @@ const RemoveBackground = () => {
   if (originalImageUrl) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center p-8 bg-gray-50">
-        <div className="max-w-3xl w-full bg-white p-8 rounded-lg shadow-md border border-gray-200 text-center">
-          <div className="flex items-center justify-center gap-3 mb-6 text-green-600">
+        <div className="max-w-3xl w-full bg-white p-8 rounded-lg shadow-md border border-gray-200">
+          <div className="flex gap-3 mb-6 text-[var(--primary-color)]">
             <RiSparkling2Fill size={24} />
             <h2 className="text-2xl font-bold text-gray-800">Remove Image Background</h2>
           </div>
@@ -109,7 +109,7 @@ const RemoveBackground = () => {
             <img 
               src={originalImageUrl} 
               alt="Original" 
-              className="max-w-full max-h-full object-contain" // Ensures image fits without distortion
+              className="max-w-full max-h-full p-2 object-contain" // Ensures image fits without distortion
             />
 
             {isLoading && (
@@ -126,14 +126,14 @@ const RemoveBackground = () => {
             type="button"
             onClick={handleRemoveBackground}
             disabled={isLoading}
-            className="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-md hover:bg-green-700 disabled:bg-green-300 flex items-center justify-center gap-2 transition-colors"
+            className="w-full bg-[var(--primary-color)] text-white font-bold py-3 px-4 cursor-pointer rounded-md hover:bg-green-700 disabled:bg-green-300 flex items-center justify-center gap-2 transition-colors"
           >
             {isLoading ? 'Removing Background...' : 'Remove Background'}
           </button>
           <button
             type="button"
             onClick={handleReset}
-            className="mt-4 w-full bg-gray-400 text-white font-bold py-3 px-4 rounded-md hover:bg-gray-500 transition-colors flex items-center justify-center gap-2"
+            className="mt-4 w-full bg-gray-400 text-white font-bold py-3 px-4 cursor-pointer rounded-md hover:bg-gray-500 transition-colors flex items-center justify-center gap-2"
           >
             Change Image
           </button>
@@ -143,8 +143,8 @@ const RemoveBackground = () => {
   }
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-8 bg-gray-50">
-      <div className="max-w-lg w-full bg-white p-8 rounded-lg shadow-md border border-gray-200">
+    <div className="min-h-screen w-full p-10 bg-gray-50">
+      <div className="w-full bg-white p-8 rounded-lg shadow-md border border-gray-200">
         <div className="flex items-center gap-3 mb-6 text-green-600">
           <RiSparkling2Fill size={24} />
           <h2 className="text-2xl font-bold text-gray-800">Remove Image Background</h2>
