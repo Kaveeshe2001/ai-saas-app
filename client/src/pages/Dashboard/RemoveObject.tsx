@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify";
 import { removeObjectAPI } from "../../services/ImageEditingService";
 import { RiSparkling2Fill, RiUploadCloud2Line } from "@remixicon/react";
+import DisplayObjectRemovedImage from "./_components/DisplayObjectRemovedImage";
 
 const RemoveObject = () => {
   const [originalImage, setOriginalImage] = useState<File | null>(null);
@@ -17,6 +18,11 @@ const RemoveObject = () => {
       setOriginalImage(e.target.files[0]);
       setProcessedImage(null);
     }
+  };
+
+  const resetState = () => {
+    setOriginalImage(null);
+    setProcessedImage(null);
   };
 
   useEffect(() => {
@@ -90,7 +96,16 @@ const RemoveObject = () => {
   };
 
   if (processedImage) {
-    return;
+    return (
+      <div>
+        {processedImage && (
+            <DisplayObjectRemovedImage 
+                processedImage={processedImage} 
+                resetState={resetState} 
+            />
+        )}
+      </div>
+    )
   }
 
   if (originalImage) {
