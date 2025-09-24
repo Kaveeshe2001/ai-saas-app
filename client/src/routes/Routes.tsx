@@ -9,6 +9,7 @@ import WriteArticle from "../pages/Dashboard/WriteArticle";
 import GenerateImages from "../pages/Dashboard/GenerateImages";
 import Community from "../pages/Dashboard/Community";
 import RemoveObject from "../pages/Dashboard/RemoveObject";
+import ReviewResume from "../pages/Dashboard/ReviewResume";
 
 export const router = createBrowserRouter([
     {
@@ -55,6 +56,14 @@ export const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <RemoveObject />
+                    </ProtectedRoute>
+                )
+            },
+            {
+                path: 'review-resume',
+                element: (
+                    <ProtectedRoute>
+                        <ReviewResume />
                     </ProtectedRoute>
                 )
             },
