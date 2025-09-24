@@ -2,10 +2,10 @@
 
 namespace server_saas.Interfaces
 {
-    public interface IBEditedImageRepository
+    public interface IEditedImageRepository
     {
-        Task<BEditedImage> CreateAsync(BEditedImage image);
-        Task<List<BEditedImage>> GetAllByUserIdAsync(string userId);
-        Task<BEditedImage?> GetByIdAsync(int id);
+        Task<EditedImage> CreateAsync(EditedImage image);
+        Task<List<EditedImage>> GetAllByUserIdAsync(string userId);
+        Task<EditedImage?> GetByIdAsync(int id);
     }
 }

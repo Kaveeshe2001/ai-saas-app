@@ -1,6 +1,6 @@
 ﻿namespace server_saas.Dto.BackgroundRemove
 {
-    public class BEditedImageDto
+    public class EditedImageDto
     {
         public int Id { get; set; }
         public string ProcessedImageUrl { get; set; }

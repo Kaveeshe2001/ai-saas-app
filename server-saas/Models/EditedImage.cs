@@ -2,7 +2,7 @@
 
 namespace server_saas.Models
 {
-    public class BEditedImage
+    public class EditedImage
     {
         public int Id { get; set; }
         [Required]

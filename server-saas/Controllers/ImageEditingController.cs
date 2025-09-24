@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using server_saas.Dto.RemoveObject;
 using server_saas.Interfaces;
 using server_saas.Mappers;
 using server_saas.Models;
@@ -42,9 +43,9 @@ namespace server_saas.Controllers
 
         [HttpPost("remove-object")]
         [Authorize]
-        public async Task<IActionResult> RemoveObject([FromForm] IFormFile imageFile, [FromForm] IFormFile maskFile)
+        public async Task<IActionResult> RemoveObject([FromForm] RemoveObjectRequestDto requestDto)
         {
-            if (imageFile == null || maskFile == null)
+            if (requestDto.ImageFile == null || requestDto.MaskFile == null)
             {
                 return BadRequest("Both an image file and a mask file are required.");
             }
@@ -54,7 +55,7 @@ namespace server_saas.Controllers
 
             try
             {
-                var newImageRecord = await _imageEditingService.RemoveObjectAsync(imageFile, maskFile, user);
+                var newImageRecord = await _imageEditingService.RemoveObjectAsync(requestDto.ImageFile, requestDto.MaskFile, user);
                 var responseDto = EditedImageMappers.ToEditedImageDto(newImageRecord);
                 return Ok(responseDto);
             }
