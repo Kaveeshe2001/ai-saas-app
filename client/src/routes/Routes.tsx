@@ -8,6 +8,7 @@ import Profile from "../pages/Profile/Profile";
 import WriteArticle from "../pages/Dashboard/WriteArticle";
 import GenerateImages from "../pages/Dashboard/GenerateImages";
 import Community from "../pages/Dashboard/Community";
+import RemoveObject from "../pages/Dashboard/RemoveObject";
 
 export const router = createBrowserRouter([
     {
@@ -46,6 +47,14 @@ export const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <Community />
+                    </ProtectedRoute>
+                )
+            },
+            {
+                path: 'remove-object',
+                element: (
+                    <ProtectedRoute>
+                        <RemoveObject />
                     </ProtectedRoute>
                 )
             },

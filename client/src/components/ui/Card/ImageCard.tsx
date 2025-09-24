@@ -42,7 +42,7 @@ const ImageCard = ({ image }: ImageCardProps) => {
         </p>
         <div className="flex justify-between items-center mt-2">
             <p className="text-xs text-gray-300">by @{image.userName}</p>
-            <div className="flex items-center gap-1 text-white bg-black/30 rounded-full px-2 py-1">
+            <div className="flex items-center gap-1 text-white px-2 py-1">
                 <button
                     onClick={handleLikeClick}
                     className={`flex items-center gap-1 rounded-full px-2 py-1 transition-colors ${
