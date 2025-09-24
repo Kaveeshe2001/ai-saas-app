@@ -77,7 +77,7 @@ const ReviewResume = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {/* Left side configuration panel */}
         <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
-          <div className="flex items-center gap-3 mb-6 text-green-600">
+          <div className="flex items-center gap-3 mb-6 text-[var(--primary-color)]">
             <RiSparkling2Fill size={24} />
             <h2 className="text-2xl font-bold text-gray-800">Resume Review</h2>
           </div>
@@ -107,7 +107,7 @@ const ReviewResume = () => {
               type="button"
               onClick={handleSubmit}
               disabled={isLoading || !resumeFile}
-              className="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-md hover:bg-green-700 disabled:bg-green-300 flex items-center justify-center gap-2 transition-colors"
+              className="w-full bg-[var(--primary-color)] cursor-pointer text-white font-bold py-3 px-4 rounded-md hover:bg-green-800 disabled:bg-green-300 flex items-center justify-center gap-2 transition-colors"
             >
               Review Resume
             </button>
@@ -117,7 +117,7 @@ const ReviewResume = () => {
         {/* Right side display area */}
         <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
           <div className="flex items-center gap-3 mb-6 text-gray-600">
-            <RiFileList2Line size={24} />
+            <RiFileList2Line size={24} className="text-[var(--primary-color)]"/>
             <h2 className="text-2xl font-bold text-gray-800">Analysis Results</h2>
           </div>
           <div className="h-[30rem] overflow-y-auto">
