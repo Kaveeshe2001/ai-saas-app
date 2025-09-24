@@ -10,6 +10,7 @@ import GenerateImages from "../pages/Dashboard/GenerateImages";
 import Community from "../pages/Dashboard/Community";
 import RemoveObject from "../pages/Dashboard/RemoveObject";
 import ReviewResume from "../pages/Dashboard/ReviewResume";
+import RemoveBackground from "../pages/Dashboard/RemoveBackground";
 
 export const router = createBrowserRouter([
     {
@@ -48,6 +49,14 @@ export const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <Community />
+                    </ProtectedRoute>
+                )
+            },
+            {
+                path: 'remove-background',
+                element: (
+                    <ProtectedRoute>
+                        <RemoveBackground />
                     </ProtectedRoute>
                 )
             },
