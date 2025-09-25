@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { useAuth } from "../../context/useAuth";
 import { generatedAIImageAPI, getCloudinarySignatureAPI } from "../../services/GeneratedImageService";
-import axios from "axios";
 import { toast } from "react-toastify";
 import ConfigurationForm from "./_components/ConfigurationForm";
 import DisplayImage from "./_components/DisplayImage";
@@ -56,17 +55,28 @@ const GenerateImages = () => {
 
       //Upload the file directly to Cloudinary
       const formData = new FormData();
-      formData.append('file', imageFile);
       formData.append('api_key', apiKey);
-      formData.append('timestamp', String(timestamp));
+      formData.append('folder', folder); 
       formData.append('signature', signature);
-      formData.append('folder', folder);
+      formData.append('timestamp', String(timestamp)); 
+      formData.append('file', imageFile);
 
-      const cloudinaryResponse = await axios.post(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        formData
-      );
-      const finalImageUrl = cloudinaryResponse.data.secure_url;
+      const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+            {
+                method: 'POST',
+                body: formData,
+            }
+        );
+
+        if (!response.ok) {
+            // If the upload fails, try to get the error message from Cloudinary
+            const errorData = await response.json();
+            throw new Error(errorData.error.message || 'Cloudinary upload failed.');
+        }
+
+        const cloudinaryData = await response.json();
+        const finalImageUrl = cloudinaryData.secure_url;
 
       //Save the final Url and details to DB
       //await saveImageToDB_API({ prompt, style: selectedStyle, imageUrl: finalImageUrl, isPublic: makePublic });
@@ -87,7 +97,7 @@ const GenerateImages = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [prompt, selectedStyle, makePublic, isPremium]);
+  }, [prompt, selectedStyle, makePublic]);
 
   return (
     <div className="bg-gray-50 flex items-center justify-center p-8">
