@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server_saas.Models
 {
+    [Table("Contact")]
     public class Article
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         [MaxLength(200)]
