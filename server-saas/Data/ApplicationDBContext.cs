@@ -46,5 +46,6 @@ namespace server_saas.Data
         public DbSet<ResumeReview> ResumeReviews { get; set; }
         public DbSet<EditedImage> BeditedImages { get; set; }
         public DbSet<ContactUs> Contactus { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
     }
 }
