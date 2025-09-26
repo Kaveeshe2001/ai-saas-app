@@ -21,6 +21,7 @@
  align-items: center;
  line-height: 1;
  gap: 10px;
+ cursor: pointer;
 
  span {
   position: absolute;

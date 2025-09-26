@@ -11,6 +11,7 @@ import Community from "../pages/Dashboard/Community";
 import RemoveObject from "../pages/Dashboard/RemoveObject";
 import ReviewResume from "../pages/Dashboard/ReviewResume";
 import RemoveBackground from "../pages/Dashboard/RemoveBackground";
+import Contact from "../pages/Contact/Contact";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
             { index: true, element: <Home /> },
             { path: 'login', element: <Login /> },
             { path: 'signup', element: <Signup /> },
+            { path: 'contact', element: <Contact /> },
             {
                 path: 'dashboard',
                 element: (

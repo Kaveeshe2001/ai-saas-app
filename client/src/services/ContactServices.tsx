@@ -12,7 +12,7 @@ export const contactPostAPI = async (
 ) => {
     try {
         const data = await axios.post<ContactPost>(
-            api,
+            `${api}contact`,
             {
                 name: name,
                 email: email,
