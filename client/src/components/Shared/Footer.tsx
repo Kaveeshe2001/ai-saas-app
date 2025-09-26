@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { assets } from "../../assets/assets";
 import SecondaryButton from "../ui/Buttons/SecondaryButton/SecondaryButton";
+import { feedbackPostAPI } from "../../services/FeedbackServices";
+import { toast } from "react-toastify";
 
 const inputClasses = "block w-full px-4 py-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500";
 const errorInputClasses = "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500";
@@ -8,20 +10,34 @@ const errorInputClasses = "bg-red-50 border-red-500 text-red-900 placeholder-red
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<{email?: string;}>({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const newErrors: { email?: string; } = {};
-
-    if (!email) {
-        newErrors.email = 'Email is required';
-    }
-
+  
+    if (!email.trim()) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Email is invalid';
+  
     if (Object.keys(newErrors).length > 0) {
         setErrors(newErrors);
-    } else {
-        setErrors({});
-        setEmail('');
+        return;
+    }
+      
+    setErrors({});
+    setIsLoading(true);
+
+    try {
+        const res = await feedbackPostAPI(email);
+        if (res) {
+            toast.success('Your email has been sent successfully!');
+  
+            setEmail('');
+        }
+    } catch (e: any) {
+        toast.error(e.message || "Something went wrong. Please try again.");
+    } finally {
+        setIsLoading(false);
     }
   };
 
@@ -62,7 +78,11 @@ const Footer = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                                 {errors.email && <p className="mt-2 text-xs text-red-600">{errors.email}</p>}
-                                <SecondaryButton variant="active" text="Subscribe" type="submit" />
+                                <SecondaryButton 
+                                    variant="active" 
+                                    text={isLoading ? "Sending..." : "Subscribe"}
+                                    type="submit" 
+                                />
                             </div>
                         </form>
                         
