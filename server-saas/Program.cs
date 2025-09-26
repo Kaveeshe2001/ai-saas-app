@@ -76,6 +76,7 @@ namespace server_saas
             builder.Services.AddScoped<ITextAnalysisService, TextAnalysisService>();
             builder.Services.AddScoped<IEditedImageRepository, EditedImageRepository>();
             builder.Services.AddScoped<IImageEditingService, ImageEditingService>();
+            builder.Services.AddScoped<IContactRepository, ContactRepository>();
 
             builder.Services.AddHttpClient();
 

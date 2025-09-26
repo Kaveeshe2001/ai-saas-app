@@ -17,7 +17,7 @@ namespace server_saas.Mappers
             };
         }
 
-        public async ContactUs ToContactFromCreate(this CreateContactDto createContactDto)
+        public static ContactUs ToContactFromCreate(this CreateContactDto createContactDto)
         {
             return new ContactUs
             {
