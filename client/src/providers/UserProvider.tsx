@@ -1,9 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import type { UserProfile } from "../models/User"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { loginAPI, registerAPI } from "../services/AuthServices";
+import apiClient from "../services/apiClient";
 
 type UserContextType = {
     user: UserProfile | null;
@@ -31,11 +32,23 @@ export const UserContext = createContext<UserContextType>(
 
 export const UserProvider = ({children}: Props) => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [token, setToken] = useState<string | null>(null);
     const [id, setId] = useState<string | null>(null);
     const [user, setUser] = useState<UserProfile | null>(null);
     const [isPremium, setIsPremium] = useState<boolean>(false);
     const [isReady, setIsReady] = useState(false);
+
+    const fetchUserStatus = async () => {
+        try {
+            const response = await apiClient.get('/account/profile');
+            const { isPremium } = response.data;
+            localStorage.setItem('isPremium', String(isPremium));
+            setIsPremium(isPremium);
+        } catch (error) {
+            console.error("Could not refresh user status", error);
+        }
+    }
 
     useEffect(() => {
         const user = localStorage.getItem('user');
@@ -49,9 +62,15 @@ export const UserProvider = ({children}: Props) => {
             setId(id);
             setIsPremium(premiumStatus);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
+            // Check if the user has just returned from a successful payment
+            const queryParams = new URLSearchParams(location.search);
+            if (queryParams.get('payment') === 'success') {
+                fetchUserStatus(); // Re-fetch status to get the new 'isPremium: true'
+            }
         }
         setIsReady(true);
-    }, []);
+    }, [location]);
 
     const registerUser = async (
         email: string,
