@@ -1,6 +1,7 @@
 import axios from "axios";
-import type { UserProfileToken } from "../models/User";
+import type { UserPremiumProfile, UserProfileToken } from "../models/User";
 import { handleError } from "../handlers/ErrorHandler";
+import apiClient from "./apiClient";
 
 const api = 'http://localhost:5257/server_saas/';
 
@@ -39,5 +40,15 @@ export const getUserByIdApi = async (userId: string) => {
         return data; 
     } catch (error) {
         handleError(error);
+    }
+}
+
+export const getUserProfileAPI = async (): Promise<UserPremiumProfile | undefined> => {
+    try {
+        const response = await apiClient.get<UserPremiumProfile>('/account/profile');
+        return response.data;
+    } catch (error) {
+        handleError(error);
+        throw error;
     }
 }

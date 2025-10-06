@@ -10,3 +10,10 @@ export type UserProfile = {
     userName: string;
     email: string;
 }
+
+export type UserPremiumProfile = {
+    id: string;
+    userName: string;
+    email: string;
+    isPremium: boolean;
+}
