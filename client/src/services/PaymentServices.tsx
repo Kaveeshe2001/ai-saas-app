@@ -1,12 +1,13 @@
-import { handleError } from "../handlers/ErrorHandler";
-import apiClient from "./apiClient"
+import apiClient from './apiClient';
+import { handleError } from '../handlers/ErrorHandler';
 
-export const createCheckoutSessionAPI = async () => {
+// The return type promises an object with a URL, or undefined on failure
+export const createCheckoutSessionAPI = async (): Promise<{ url: string } | undefined> => {
     try {
         const response = await apiClient.post<{ url: string }>('/payment/create-checkout-session');
-        response.data;
+        return response.data;
     } catch (error) {
         handleError(error);
         throw error;
     }
-}
+};

@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/useAuth";
 import SubscriptionCard from "../../ui/Card/SubscriptionCard";
-
-const api = 'http://localhost:5257/server_saas/';
+import { createCheckoutSessionAPI } from "../../../services/PaymentServices";
 
 const Plan = () => {
-  const { isLoggedIn, isPremium, token } = useAuth();
+  const { isLoggedIn, isPremium } = useAuth();
   const navigate = useNavigate();
 
   const features = {
@@ -23,10 +22,10 @@ const Plan = () => {
       return;
     }
 
-    if (!token) return;
+    //if (!token) return;
 
     try {
-      const response = await fetch(api + 'payment/create-checkout-session', {
+      /*const response = await fetch(api + 'payment/create-checkout-session', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -39,6 +38,11 @@ const Plan = () => {
         window.location.href = data.url;
       } else {
         console.error("Failed to create Stripe checkout session");
+      }*/
+
+      const data = await createCheckoutSessionAPI();
+      if (data && data.url) {
+        window.location.href = data.url;
       }
     } catch (error) {
       console.error("Subscription Error:", error);
