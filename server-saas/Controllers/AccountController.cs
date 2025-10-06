@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server_saas.Dto.Account;
@@ -115,6 +116,27 @@ namespace server_saas.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
+        }
+
+        [HttpGet("profile")]
+        [Authorize]
+        public async Task<IActionResult> GetUserProfile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var userProfileDto = new UserProfileDto
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                IsPremium = user.IsPremium
+            };
+
+            return Ok(userProfileDto);
         }
     }
 }
