@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using server_saas.Extentions;
 using server_saas.Models;
 using Stripe;
 using Stripe.Checkout;
@@ -25,10 +26,12 @@ namespace server_saas.Controllers
         [Authorize]
         public async Task<IActionResult> CreateCheckoutSession()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User cannot be found");
             }
 
             var priceId = _config["Stripe:PriceId"];
