@@ -3,8 +3,8 @@ import type { UserProfile } from "../models/User"
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { loginAPI, registerAPI } from "../services/AuthServices";
-import apiClient from "../services/apiClient";
+import { getUserProfileAPI, loginAPI, registerAPI } from "../services/AuthServices";
+
 
 type UserContextType = {
     user: UserProfile | null;
@@ -41,10 +41,12 @@ export const UserProvider = ({children}: Props) => {
 
     const fetchUserStatus = async () => {
         try {
-            const response = await apiClient.get('/account/profile');
-            const { isPremium } = response.data;
-            localStorage.setItem('isPremium', String(isPremium));
-            setIsPremium(isPremium);
+            const profile = await getUserProfileAPI();
+            if (profile) {
+                localStorage.setItem('isPremium', String(profile.isPremium));
+                setIsPremium(profile.isPremium);
+            }
+            
         } catch (error) {
             console.error("Could not refresh user status", error);
         }
@@ -66,6 +68,7 @@ export const UserProvider = ({children}: Props) => {
             // Check if the user has just returned from a successful payment
             const queryParams = new URLSearchParams(location.search);
             if (queryParams.get('payment') === 'success') {
+                toast.success("Subscription successful! Welcome to Premium.");
                 fetchUserStatus(); // Re-fetch status to get the new 'isPremium: true'
             }
         }

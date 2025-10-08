@@ -28,55 +28,15 @@ export const router = createBrowserRouter([
                     <ProtectedRoute>
                         <Profile />
                     </ProtectedRoute>
-                )
-            },
-            {
-                path: 'write-article',
-                element: (
-                    <ProtectedRoute>
-                        <WriteArticle />
-                    </ProtectedRoute>
-                )
-            },
-            {
-                path: 'generate-images',
-                element: (
-                    <ProtectedRoute>
-                        <GenerateImages />
-                    </ProtectedRoute>
-                )
-            },
-            {
-                path: 'community',
-                element: (
-                    <ProtectedRoute>
-                        <Community />
-                    </ProtectedRoute>
-                )
-            },
-            {
-                path: 'remove-background',
-                element: (
-                    <ProtectedRoute>
-                        <RemoveBackground />
-                    </ProtectedRoute>
-                )
-            },
-            {
-                path: 'remove-object',
-                element: (
-                    <ProtectedRoute>
-                        <RemoveObject />
-                    </ProtectedRoute>
-                )
-            },
-            {
-                path: 'review-resume',
-                element: (
-                    <ProtectedRoute>
-                        <ReviewResume />
-                    </ProtectedRoute>
-                )
+                ),
+                children: [
+                    { path: 'write-article', element: <WriteArticle /> }, 
+                    { path: 'generate-images', element: <GenerateImages /> },
+                    { path: 'remove-background', element: <RemoveBackground /> },
+                    { path: 'remove-object', element: <RemoveObject /> },
+                    { path: 'review-resume', element: <ReviewResume /> },
+                    { path: 'community', element: <Community /> },
+                ]
             },
         ]
     }
