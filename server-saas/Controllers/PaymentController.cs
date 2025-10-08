@@ -61,6 +61,16 @@ namespace server_saas.Controllers
         {
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
             var webhookSecret = _config["Stripe:WebhookSecret"];
+            var signatureHeader = Request.Headers["Stripe-Signature"];
+
+            if (string.IsNullOrEmpty(webhookSecret))
+            {
+                return BadRequest("Webhook secret is not configured.");
+            }
+            if (string.IsNullOrEmpty(signatureHeader))
+            {
+                return BadRequest("Stripe-Signature header is missing.");
+            }
 
             try
             {
@@ -88,9 +98,16 @@ namespace server_saas.Controllers
                 }
 
                 return Ok();
-            } catch (StripeException ex)
+            }
+            catch (StripeException ex)
             {
-                return BadRequest(ex.Message);
+                // Return a more specific error for bad signatures
+                return BadRequest(new { Error = "Invalid Stripe signature.", Details = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // Catch any other unexpected errors
+                return StatusCode(500, new { Error = "An unexpected error occurred.", Details = ex.Message });
             }
         }
     }
